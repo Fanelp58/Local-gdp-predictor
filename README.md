@@ -1,4 +1,5 @@
 📊 Prédiction du PIB Réel du Bénin avec un Modèle VAR
+
 📝 Contexte
 
 Ce projet vise à modéliser et prédire l’évolution du Produit Intérieur Brut (PIB) réel du Bénin à court terme (horizon de 5 ans).
