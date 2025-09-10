@@ -1,127 +1,58 @@
-📊 Prédiction du PIB Réel du Bénin avec un Modèle VAR
+# GDP Forecasting with VAR/VECM Models
 
-📝 Contexte
+## 📌 Theoretical Foundations
 
-Ce projet vise à modéliser et prédire l’évolution du Produit Intérieur Brut (PIB) réel du Bénin à court terme (horizon de 5 ans).
-L’approche repose sur un modèle économétrique VAR (Vector AutoRegressive) appliqué aux taux de croissance de trois variables clés :
+### 1. GDP as the Core Indicator
+Gross Domestic Product (GDP) measures the total value of goods and services produced in a country over a given period.  
+It is influenced by:
+- **Domestic demand** (consumption, investment),
+- **External demand** (net exports, trade balance),
+- **Public policies** (fiscal and monetary).
 
-📈 PIB réel (dollars constants de 2015)
+---
 
-🏗️ Investissement (Formation Brute de Capital Fixe)
+### 2. Econometric Approach: Time Series Models
+This project relies on **multivariate time series models** to capture the dynamic interactions between GDP, investment, and trade balance.
 
-🌍 Balance commerciale
+#### a) VAR (Vector AutoRegressive) – *Sims, 1980*
+- All variables are treated as **endogenous**.  
+- Each variable depends on its own past values and the past values of the other variables.  
+- Requires **stationary data** (constant mean and variance over time).  
 
-L’utilisation du PIB réel permet de neutraliser les effets de l’inflation et de se concentrer sur la croissance économique tangible.
+#### b) VECM (Vector Error Correction Model) – *Engle & Granger, 1987; Johansen, 1991*
+- Used when variables are **non-stationary but cointegrated**.  
+- Captures:
+  - **Short-term dynamics** (differences of variables),  
+  - **Long-term equilibrium** (cointegration relationships).  
 
-🎯 Objectifs
+👉 In this project, the Johansen test failed to converge, so a **differenced VAR model** was retained.
 
-Construire un modèle robuste pour prédire la croissance du PIB réel.
+---
 
-Mettre en évidence le rôle des investissements et du secteur extérieur dans la dynamique économique du Bénin.
+### 3. Economic Justification of Variables
+- **Investment**: key driver of growth (capital accumulation → higher production).  
+- **Trade Balance (% of GDP)**: reflects external openness and foreign demand.  
+- **GDP**: target variable, but also influences others (income effects, imports, savings).  
 
-Fournir une application interactive de visualisation et d’exploration via Streamlit.
+This setup follows growth models in an **open economy context** (Solow, Harrod-Domar, post-Keynesian approaches).
 
-🏗️ Architecture du projet
-1. Entraînement et sérialisation du modèle (train_and_serialize_model.py)
+---
 
-Chargement et préparation des données (source : Banque mondiale).
+### 4. Underlying Assumptions
+- Stationarity (or achieved by differencing).  
+- Endogeneity: all variables are jointly determined.  
+- Linearity: VAR assumes linear dynamic relations.  
+- Errors are white noise (no autocorrelation, homoscedastic).  
 
-Transformation en taux de croissance pour assurer la stationnarité.
+---
 
-Estimation d’un modèle VAR avec sélection optimale du lag via le critère AIC.
+### 5. Policy Relevance
+- Short-term **GDP forecasting**.  
+- Understanding the role of investment and trade in economic growth.  
+- Basis for **impulse response analysis** and **variance decomposition** (future extensions).
 
-Diagnostic des résidus :
+---
 
-Durbin-Watson (autocorrélation)
-
-Shapiro-Wilk (normalité)
-
-Test de White (homoscédasticité)
-
-Sérialisation du modèle et des diagnostics dans un fichier growth_model_bundle.pkl.
-
-2. Application Streamlit (app.py)
-
-Page Accueil : présentation du projet, fondements théoriques, méthodologie.
-
-Analyse descriptive :
-
-Exploration des données macroéconomiques (PIB, investissement, balance commerciale).
-
-Visualisations interactives.
-
-Analyse économétrique :
-
-Prédictions du PIB réel sur 5 ans.
-
-Intervalle de confiance à 95%.
-
-Visualisations des projections.
-
-Diagnostic du modèle.
-
-⚙️ Installation
-Prérequis
-
-Python 3.9+
-
-pip ou conda
-
-Dépendances
-
-Installer les librairies nécessaires :
-
-pip install -r requirements.txt
-
-
-Le fichier requirements.txt doit inclure :
-
-pandas
-numpy
-statsmodels
-scipy
-joblib
-matplotlib
-streamlit
-
-🚀 Utilisation
-1. Entraîner le modèle
-
-Exécuter le script d’entraînement pour générer le bundle :
-
-python train_and_serialize_model.py
-
-
-Cela crée le fichier growth_model_bundle.pkl.
-
-2. Lancer l’application Streamlit
-streamlit run app.py
-
-
-Accéder à l’application via http://localhost:8501
-.
-
-📂 Organisation du dépôt
-📁 projet-pib-benin
-│── donnees_benin.csv              # Données macroéconomiques brutes
-│── train_and_serialize_model.py   # Script d’entraînement VAR + diagnostics
-│── app.py                         # Application Streamlit
-│── growth_model_bundle.pkl        # Bundle sérialisé (modèle + données + diagnostics)
-│── requirements.txt               # Dépendances Python
-│── README.md                      # Documentation du projet
-
-⚠️ Limites du projet
-
-Les prévisions VAR sont fiables à court terme (2-3 ans).
-
-Le modèle ne peut pas anticiper des chocs externes imprévus (crises, politiques économiques, pandémies).
-
-La balance commerciale est exprimée en dollars courants puis transformée en croissance, ce qui peut introduire une volatilité supplémentaire.
-
-📖 Références
-
-Banque mondiale – World Development Indicators : Databank
-
-Hamilton, J. D. (1994). Time Series Analysis. Princeton University Press.
-
-Lutkepohl, H. (2005). New Introduction to Multiple Time Series Analysis. Springer.
+## 🎯 Summary
+This project applies **VAR/VECM econometric theory** to model GDP, focusing on the **dynamic interactions** between GDP, investment, and trade balance in Benin.  
+It bridges **macroeconomic theory** and **applied forecasting** for policy and decision-making.
