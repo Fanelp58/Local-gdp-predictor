@@ -56,3 +56,60 @@ Installer les librairies nécessaires :
 
 ```bash
 pip install -r requirements.txt
+```
+
+Le fichier `requirements.txt` doit inclure :
+
+```
+pandas
+numpy
+statsmodels
+scipy
+joblib
+matplotlib
+streamlit
+```
+
+## 🚀 Utilisation
+
+### 1. Entraîner le modèle
+
+Exécuter le script d'entraînement pour générer le bundle :
+
+```bash
+python train_and_serialize_model.py
+```
+
+Cela crée le fichier `growth_model_bundle.pkl`.
+
+### 2. Lancer l'application Streamlit
+
+```bash
+streamlit run app.py
+```
+
+Accéder à l'application via `http://localhost:8501`
+
+## 📂 Organisation du dépôt
+
+```
+📁 projet-pib-benin
+│── donnees_benin.csv              # Données macroéconomiques brutes
+│── train_and_serialize_model.py   # Script d'entraînement VAR + diagnostics
+│── app.py                         # Application Streamlit
+│── growth_model_bundle.pkl        # Bundle sérialisé (modèle + données + diagnostics)
+│── requirements.txt               # Dépendances Python
+│── README.md                      # Documentation du projet
+```
+
+## ⚠️ Limites du projet
+
+* Les prévisions VAR sont fiables à court terme (2-3 ans)
+* Le modèle ne peut pas anticiper des chocs externes imprévus (crises, politiques économiques, pandémies)
+* La balance commerciale est exprimée en dollars courants puis transformée en croissance, ce qui peut introduire une volatilité supplémentaire
+
+## 📖 Références
+
+* Banque mondiale – World Development Indicators : [Databank](https://databank.worldbank.org/source/world-development-indicators)
+* Hamilton, J. D. (1994). *Time Series Analysis*. Princeton University Press
+* Lütkepohl, H. (2005). *New Introduction to Multiple Time Series Analysis*. Springer
