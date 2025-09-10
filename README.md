@@ -1,58 +1,58 @@
-# GDP Forecasting with VAR/VECM Models
+# 📊 Prédiction du PIB Réel du Bénin avec un Modèle VAR
 
-## 📌 Theoretical Foundations
+## 📝 Contexte
 
-### 1. GDP as the Core Indicator
-Gross Domestic Product (GDP) measures the total value of goods and services produced in a country over a given period.  
-It is influenced by:
-- **Domestic demand** (consumption, investment),
-- **External demand** (net exports, trade balance),
-- **Public policies** (fiscal and monetary).
+Ce projet vise à modéliser et prédire l'évolution du Produit Intérieur Brut (PIB) réel du Bénin à court terme (horizon de 5 ans).
 
----
+L'approche repose sur un modèle économétrique VAR (Vector AutoRegressive) appliqué aux taux de croissance de trois variables clés :
 
-### 2. Econometric Approach: Time Series Models
-This project relies on **multivariate time series models** to capture the dynamic interactions between GDP, investment, and trade balance.
+* 📈 **PIB réel** (dollars constants de 2015)
+* 🏗️ **Investissement** (Formation Brute de Capital Fixe)
+* 🌍 **Balance commerciale**
 
-#### a) VAR (Vector AutoRegressive) – *Sims, 1980*
-- All variables are treated as **endogenous**.  
-- Each variable depends on its own past values and the past values of the other variables.  
-- Requires **stationary data** (constant mean and variance over time).  
+L'utilisation du PIB réel permet de neutraliser les effets de l'inflation et de se concentrer sur la croissance économique tangible.
 
-#### b) VECM (Vector Error Correction Model) – *Engle & Granger, 1987; Johansen, 1991*
-- Used when variables are **non-stationary but cointegrated**.  
-- Captures:
-  - **Short-term dynamics** (differences of variables),  
-  - **Long-term equilibrium** (cointegration relationships).  
+## 🎯 Objectifs
 
-👉 In this project, the Johansen test failed to converge, so a **differenced VAR model** was retained.
+* Construire un modèle robuste pour prédire la croissance du PIB réel
+* Mettre en évidence le rôle des investissements et du secteur extérieur dans la dynamique économique du Bénin
+* Fournir une application interactive de visualisation et d'exploration via Streamlit
 
----
+## 🏗️ Architecture du projet
 
-### 3. Economic Justification of Variables
-- **Investment**: key driver of growth (capital accumulation → higher production).  
-- **Trade Balance (% of GDP)**: reflects external openness and foreign demand.  
-- **GDP**: target variable, but also influences others (income effects, imports, savings).  
+### 1. Entraînement et sérialisation du modèle (`train_and_serialize_model.py`)
 
-This setup follows growth models in an **open economy context** (Solow, Harrod-Domar, post-Keynesian approaches).
+* Chargement et préparation des données (source : Banque mondiale)
+* Transformation en taux de croissance pour assurer la stationnarité
+* Estimation d'un modèle VAR avec sélection optimale du lag via le critère AIC
+* Diagnostic des résidus :
+  * Durbin-Watson (autocorrélation)
+  * Shapiro-Wilk (normalité)
+  * Test de White (homoscédasticité)
+* Sérialisation du modèle et des diagnostics dans un fichier `growth_model_bundle.pkl`
 
----
+### 2. Application Streamlit (`app.py`)
 
-### 4. Underlying Assumptions
-- Stationarity (or achieved by differencing).  
-- Endogeneity: all variables are jointly determined.  
-- Linearity: VAR assumes linear dynamic relations.  
-- Errors are white noise (no autocorrelation, homoscedastic).  
+* **Page Accueil** : présentation du projet, fondements théoriques, méthodologie
+* **Analyse descriptive** :
+  * Exploration des données macroéconomiques (PIB, investissement, balance commerciale)
+  * Visualisations interactives
+* **Analyse économétrique** :
+  * Prédictions du PIB réel sur 5 ans
+  * Intervalle de confiance à 95%
+  * Visualisations des projections
+  * Diagnostic du modèle
 
----
+## ⚙️ Installation
 
-### 5. Policy Relevance
-- Short-term **GDP forecasting**.  
-- Understanding the role of investment and trade in economic growth.  
-- Basis for **impulse response analysis** and **variance decomposition** (future extensions).
+### Prérequis
 
----
+* Python 3.9+
+* pip ou conda
 
-## 🎯 Summary
-This project applies **VAR/VECM econometric theory** to model GDP, focusing on the **dynamic interactions** between GDP, investment, and trade balance in Benin.  
-It bridges **macroeconomic theory** and **applied forecasting** for policy and decision-making.
+### Dépendances
+
+Installer les librairies nécessaires :
+
+```bash
+pip install -r requirements.txt
