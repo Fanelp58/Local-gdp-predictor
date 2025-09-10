@@ -1,4 +1,4 @@
-# 📊 Prédiction du PIB Réel du Bénin avec un Modèle VAR
+# 📊 Prédiction du PIB Réel du Bénin avec un modèle VAR
 
 ## 📝 Contexte
 
