@@ -31,7 +31,7 @@ L'utilisation du PIB réel permet de neutraliser les effets de l'inflation et de
   * Test de White (homoscédasticité)
 * Sérialisation du modèle et des diagnostics dans un fichier `growth_model_bundle.pkl`
 
-### 2. Application Streamlit (`app.py`)
+### 2. Application Streamlit (`agg_predictor_app.py`)
 
 * **Page Accueil** : présentation du projet, fondements théoriques, méthodologie
 * **Analyse descriptive** :
@@ -85,7 +85,7 @@ Cela crée le fichier `growth_model_bundle.pkl`.
 ### 2. Lancer l'application Streamlit
 
 ```bash
-streamlit run app.py
+streamlit run agg_predictor_app.py
 ```
 
 Accéder à l'application via `http://localhost:8501`
@@ -93,10 +93,9 @@ Accéder à l'application via `http://localhost:8501`
 ## 📂 Organisation du dépôt
 
 ```
-📁 projet-pib-benin
 │── donnees_benin.csv              # Données macroéconomiques brutes
 │── train_and_serialize_model.py   # Script d'entraînement VAR + diagnostics
-│── app.py                         # Application Streamlit
+│── agg_predictor_app.py                         # Application Streamlit
 │── growth_model_bundle.pkl        # Bundle sérialisé (modèle + données + diagnostics)
 │── requirements.txt               # Dépendances Python
 │── README.md                      # Documentation du projet
